@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   let [pokemonName, setPokemonName] = useState("");
@@ -10,7 +11,9 @@ function App() {
   };
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) =>
+    fetch(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
+    ).then((res) =>
       res
         .json()
         .then((response) => {
@@ -22,7 +25,7 @@ function App() {
   }, [pokemonName, img]);
 
   return (
-    <div className="main">
+    <main>
       <h1>Poke Search</h1>
       <input
         type="text"
@@ -30,11 +33,13 @@ function App() {
           manageInput(e.target.value);
         }}
         value={pokemonName}
+        placeholder="Type a pokemon's name"
+        tabIndex="1"
       />
       <div>
         <img src={img} alt={pokemonName} />
       </div>
-    </div>
+    </main>
   );
 }
 
